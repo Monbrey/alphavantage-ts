@@ -70,13 +70,13 @@ See [Alpha Vantage](https://www.alphavantage.co/documentation/#time-series-data)
 
 ```typescript
 alpha.stocks.intraday(symbol, { outputsize, datatype, interval })
-alpha.stocks.daily(symbol, { outputsize, datatype, interval })
-alpha.stocks.daily_adjusted(symbol, { outputsize, datatype, interval })
-alpha.stocks.weekly(symbol, { outputsize, datatype, interval })
-alpha.stocks.weekly_adjusted(symbol, { outputsize, datatype, interval })
-alpha.stocks.monthly(symbol, { outputsize, datatype, interval })
-alpha.stocks.monthly_adjusted(symbol, { outputsize, datatype, interval })
-alpha.stocks.quote(symbol, { outputsize, datatype, interval })
+alpha.stocks.daily(symbol, { outputsize, datatype })
+alpha.stocks.daily_adjusted(symbol, { outputsize, datatype })
+alpha.stocks.weekly(symbol, { outputsize })
+alpha.stocks.weekly_adjusted(symbol, { outputsize })
+alpha.stocks.monthly(symbol, { outputsize })
+alpha.stocks.monthly_adjusted(symbol, { outputsize })
+alpha.stocks.quote(symbol, { outputsize })
 alpha.stocks.batch([symbol1, symbol2..])
 alpha.stocks.search(symbol)
 ```
@@ -114,16 +114,14 @@ alpha.technicals.trima(symbol, { interval, time_period, series_type });
 alpha.technicals.kama(symbol, { interval, time_period, series_type });
 alpha.technicals.mama(symbol, { interval, series_type, fastlimit, slowlimit });
 alpha.technicals.t3(symbol, { interval, time_period, series_type });
-alpha.technicals.macd({
-  symbol,
+alpha.technicals.macd(symbol, {
   interval,
   series_type,
   fastperiod,
   slowperiod,
   signalperiod
 });
-alpha.technicals.macdext({
-  symbol,
+alpha.technicals.macdext(symbol, {
   interval,
   series_type,
   fastperiod,
@@ -133,8 +131,7 @@ alpha.technicals.macdext({
   slowmatype,
   signalmatype
 });
-alpha.technicals.stoch({
-  symbol,
+alpha.technicals.stoch(symbol, {
   interval,
   fastkperiod,
   slowkperiod,
@@ -142,16 +139,14 @@ alpha.technicals.stoch({
   slowkmatype,
   slowdmatype
 });
-alpha.technicals.stochf({
-  symbol,
+alpha.technicals.stochf(symbol, {
   interval,
   fastkperiod,
   fastdperiod,
   fastdmatype
 });
 alpha.technicals.rsi(symbol, { interval, time_period, series_type });
-alpha.technicals.stochrsi({
-  symbol,
+alpha.technicals.stochrsi(symbol, {
   interval,
   time_period,
   series_type,
@@ -162,16 +157,14 @@ alpha.technicals.stochrsi({
 alpha.technicals.willr(symbol, { interval, time_period });
 alpha.technicals.adx(symbol, { interval, time_period });
 alpha.technicals.adxr(symbol, { interval, time_period });
-alpha.technicals.apo({
-  symbol,
+alpha.technicals.apo(symbol, {
   interval,
   series_type,
   fastperiod,
   slowperiod,
   matype
 });
-alpha.technicals.ppo({
-  symbol,
+alpha.technicals.ppo(symbol, {
   interval,
   series_type,
   fastperiod,
@@ -188,8 +181,7 @@ alpha.technicals.aroon(symbol, { interval, time_period });
 alpha.technicals.aroonosc(symbol, { interval, time_period });
 alpha.technicals.mfi(symbol, { interval, time_period });
 alpha.technicals.trix(symbol, { interval, time_period, series_type });
-alpha.technicals.ultosc({
-  symbol,
+alpha.technicals.ultosc(symbol, {
   interval,
   timeperiod1,
   timeperiod2,
@@ -200,8 +192,7 @@ alpha.technicals.minus_di(symbol, { interval, time_period });
 alpha.technicals.plus_di(symbol, { interval, time_period });
 alpha.technicals.minus_dm(symbol, { interval, time_period });
 alpha.technicals.plus_dm(symbol, { interval, time_period });
-alpha.technicals.bbands({
-  symbol,
+alpha.technicals.bbands(symbol, {
   interval,
   time_period,
   series_type,

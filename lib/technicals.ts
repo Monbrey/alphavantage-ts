@@ -37,7 +37,7 @@ export interface MultiPeriodAndMaSeriesParameters
 }
 
 class Technicals {
-  public api: Api;
+  private api: Api;
 
   constructor(api: Api) {
     this.api = api;

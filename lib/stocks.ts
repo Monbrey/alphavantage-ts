@@ -7,7 +7,7 @@ export type DataType = "json" | "csv";
 export type TimeInterval = "1min" | "5min" | "15min" | "30min" | "60min";
 
 class Stocks {
-  public api: Api;
+  private api: Api;
 
   constructor(api: Api) {
     this.api = api;

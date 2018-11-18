@@ -4,9 +4,13 @@ import { RequestResponse } from "request";
 import * as constants from "./constants";
 
 class Api {
-  public baseUrl: string;
+  private baseUrl: string;
 
   constructor(apiKey: string) {
+    this.baseUrl = `https://www.alphavantage.co/query?apikey=${apiKey}&`;
+  }
+
+  public setApiKey(apiKey: string) {
     this.baseUrl = `https://www.alphavantage.co/query?apikey=${apiKey}&`;
   }
 
@@ -61,7 +65,7 @@ class Api {
       })
       .then(({ body, statusCode }: RequestResponse) => {
         if (statusCode !== 200) {
-          throw `An AlphaVantage error occurred. ${statusCode}: ${body}`;
+          throw `An AlphaVantage error occurred (${url}). ${statusCode}: ${body}`;
         }
 
         return JSON.parse(body);

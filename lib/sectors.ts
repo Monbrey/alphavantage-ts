@@ -1,7 +1,7 @@
 import Api from "./api";
 
 class Sectors {
-  public api: Api;
+  private api: Api;
 
   constructor(api: Api) {
     this.api = api;
