@@ -13,34 +13,13 @@ class Stocks {
     this.api = api;
   }
 
-  private series = (fn: string) => (
-    symbol: string,
-    { datatype = "json" }: { datatype: DataType }
-  ) => {
-    return this.api.request(fn)({ symbol, datatype });
-  };
-
-  public dailySeries = (fn: string) => (
-    symbol: string,
-    {
-      outputsize = "compact",
-      datatype = "json"
-    }: { outputsize: OutputSize; datatype: DataType }
-  ) => {
-    return this.api.request(fn)({
-      symbol,
-      outputsize,
-      datatype
-    });
-  };
-
   public intraday = (
     symbol: string,
     {
+      interval,
       outputsize = "compact",
-      datatype = "json",
-      interval = "1min"
-    }: { outputsize: OutputSize; datatype: DataType; interval: TimeInterval }
+      datatype = "json"
+    }: { interval: TimeInterval; outputsize?: OutputSize; datatype?: DataType }
   ) => {
     return this.api.request("TIME_SERIES_INTRADAY")({
       symbol,
@@ -50,8 +29,30 @@ class Stocks {
     });
   };
 
+  private dailySeries = (fn: string) => (
+    symbol: string,
+    {
+      outputsize = "compact",
+      datatype = "json"
+    }: { outputsize?: OutputSize; datatype?: DataType }
+  ) => {
+    return this.api.request(fn)({
+      symbol,
+      outputsize,
+      datatype
+    });
+  };
+
   public daily = this.dailySeries("TIME_SERIES_DAILY");
   public daily_adjusted = this.dailySeries("TIME_SERIES_DAILY_ADJUSTED");
+
+  private series = (fn: string) => (
+    symbol: string,
+    { datatype = "json" }: { datatype?: DataType }
+  ) => {
+    return this.api.request(fn)({ symbol, datatype });
+  };
+
   public weekly = this.series("TIME_SERIES_WEEKLY");
   public weekly_adjusted = this.series("TIME_SERIES_WEEKLY_ADJUSTED");
   public monthly = this.series("TIME_SERIES_MONTHLY");
