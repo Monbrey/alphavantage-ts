@@ -1,6 +1,5 @@
-.env
-
 # Created by https://www.gitignore.io/api/osx,git,node,windows,webstorm,visualstudiocode
+dist
 
 ### Git ###
 *.orig
