@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Crypto = /** @class */ (function () {
     function Crypto(api) {
         var _this = this;
@@ -24,4 +26,5 @@ var Crypto = /** @class */ (function () {
     }
     return Crypto;
 }());
-export default Crypto;
+exports.default = Crypto;
+//# sourceMappingURL=crypto.js.map

@@ -1,3 +1,4 @@
+"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -9,8 +10,16 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import * as request from "request-promise-native";
-import * as constants from "./constants";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var request = __importStar(require("request-promise-native"));
+var constants = __importStar(require("./constants"));
 var Api = /** @class */ (function () {
     function Api(apiKey) {
         var _this = this;
@@ -107,4 +116,5 @@ var Api = /** @class */ (function () {
     }
     return Api;
 }());
-export default Api;
+exports.default = Api;
+//# sourceMappingURL=api.js.map

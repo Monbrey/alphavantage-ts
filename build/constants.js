@@ -1,31 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Time stamp regex that AlphaVantage uses.
  */
-export var timestamp = /[0-9]{4}-[0-9]{2}-[0-9]{2}( [0-9]{2}:[0-9]{2}:[0-9]{2})?/g;
+exports.timestamp = /[0-9]{4}-[0-9]{2}-[0-9]{2}( [0-9]{2}:[0-9]{2}:[0-9]{2})?/g;
 /**
  * Price regex for target markets in target currency.
  */
-export var cryptoMarketPrice = /1a\. price \(.*\)/g;
+exports.cryptoMarketPrice = /1a\. price \(.*\)/g;
 /**
  * Price open regex for target markets in target currency.
  */
-export var cryptoMarketOpen = /1a\. open \(.*\)/g;
+exports.cryptoMarketOpen = /1a\. open \(.*\)/g;
 /**
  * Price high regex for target markets in target currency.
  */
-export var cryptoMarketHigh = /2a\. high \(.*\)/g;
+exports.cryptoMarketHigh = /2a\. high \(.*\)/g;
 /**
  * Price low regex for target markets in target currency.
  */
-export var cryptoMarketLow = /3a\. low \(.*\)/g;
+exports.cryptoMarketLow = /3a\. low \(.*\)/g;
 /**
  * Price close regex for target markets in target currency.
  */
-export var cryptoMarketClose = /4a\. close \(.*\)/g;
+exports.cryptoMarketClose = /4a\. close \(.*\)/g;
 /**
  * The data keys to replace from the AlphaVantage API.
  */
-export var keys = {
+exports.keys = {
     "Aroon Down": "down",
     "Aroon Up": "up",
     "Meta Data": "meta",
@@ -194,3 +196,4 @@ export var keys = {
     "8. Time Zone": "zone",
     "8. split coefficient": "split"
 };
+//# sourceMappingURL=constants.js.map

@@ -1,6 +1,6 @@
 {
   "name": "alphavantage-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple interface to the Alpha Vantage API written in Typescript.",
   "main": "./lib/index.ts",
   "directories": {

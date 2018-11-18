@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Forex = /** @class */ (function () {
     function Forex(api) {
         var _this = this;
@@ -8,4 +10,5 @@ var Forex = /** @class */ (function () {
     }
     return Forex;
 }());
-export default Forex;
+exports.default = Forex;
+//# sourceMappingURL=forex.js.map
