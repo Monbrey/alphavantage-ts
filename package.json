@@ -1,12 +1,13 @@
 {
-  "name": "alphavantage",
-  "version": "1.2.0",
-  "description": "A simple interface to the Alpha Vantage API.",
-  "main": "index.js",
+  "name": "alphavantage-ts",
+  "version": "1.0.0",
+  "description": "A simple interface to the Alpha Vantage API written in Typescript.",
+  "main": "./lib/index.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "build": "tsc",
     "test": "jest",
     "lint": "prettier --print-width 120 --single-quote --write \"./**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
@@ -18,19 +19,23 @@
     "alphavantage",
     "stocks",
     "stock market",
-    "api"
+    "api",
+    "typescript"
   ],
-  "author": "Zack Urben <zackurben@gmail.com> (http://zackurben.com)",
+  "authors": [
+    "Zack Urben <zackurben@gmail.com> (http://zackurben.com)",
+    "Adam King <adamjking3@gmail.com> (https://github.com/adamjking3)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zackurben/alphavantage"
   },
-  "homepage": "https://github.com/zackurben/alphavantage",
+  "homepage": "https://github.com/adamjking3/alphavantage-ts",
   "engines": {
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "dotenv": "^6.1.0",
+    "@types/request-promise-native": "^1.0.15",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
   },
