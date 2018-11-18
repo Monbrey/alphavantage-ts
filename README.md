@@ -105,15 +105,15 @@ alpha.crypto.monthly(symbol, market);
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#technical-indicators) for the parameters.
 
 ```typescript
-alpha.technicals.sma({ symbol, interval, time_period, series_type });
-alpha.technicals.ema({ symbol, interval, time_period, series_type });
-alpha.technicals.wma({ symbol, interval, time_period, series_type });
-alpha.technicals.dema({ symbol, interval, time_period, series_type });
-alpha.technicals.tema({ symbol, interval, time_period, series_type });
-alpha.technicals.trima({ symbol, interval, time_period, series_type });
-alpha.technicals.kama({ symbol, interval, time_period, series_type });
-alpha.technicals.mama({ symbol, interval, series_type, fastlimit, slowlimit });
-alpha.technicals.t3({ symbol, interval, time_period, series_type });
+alpha.technicals.sma(symbol, { interval, time_period, series_type });
+alpha.technicals.ema(symbol, { interval, time_period, series_type });
+alpha.technicals.wma(symbol, { interval, time_period, series_type });
+alpha.technicals.dema(symbol, { interval, time_period, series_type });
+alpha.technicals.tema(symbol, { interval, time_period, series_type });
+alpha.technicals.trima(symbol, { interval, time_period, series_type });
+alpha.technicals.kama(symbol, { interval, time_period, series_type });
+alpha.technicals.mama(symbol, { interval, series_type, fastlimit, slowlimit });
+alpha.technicals.t3(symbol, { interval, time_period, series_type });
 alpha.technicals.macd({
   symbol,
   interval,
@@ -149,7 +149,7 @@ alpha.technicals.stochf({
   fastdperiod,
   fastdmatype
 });
-alpha.technicals.rsi({ symbol, interval, time_period, series_type });
+alpha.technicals.rsi(symbol, { interval, time_period, series_type });
 alpha.technicals.stochrsi({
   symbol,
   interval,
@@ -159,9 +159,9 @@ alpha.technicals.stochrsi({
   slowdperiod,
   fastdmatype
 });
-alpha.technicals.willr({ symbol, interval, time_period });
-alpha.technicals.adx({ symbol, interval, time_period });
-alpha.technicals.adxr({ symbol, interval, time_period });
+alpha.technicals.willr(symbol, { interval, time_period });
+alpha.technicals.adx(symbol, { interval, time_period });
+alpha.technicals.adxr(symbol, { interval, time_period });
 alpha.technicals.apo({
   symbol,
   interval,
@@ -178,16 +178,16 @@ alpha.technicals.ppo({
   slowperiod,
   matype
 });
-alpha.technicals.mom({ symbol, interval, time_period, series_type });
-alpha.technicals.bop({ symbol, interval });
-alpha.technicals.cci({ symbol, interval, time_period });
-alpha.technicals.cmo({ symbol, interval, time_period, series_type });
-alpha.technicals.roc({ symbol, interval, time_period, series_type });
-alpha.technicals.rocr({ symbol, interval, time_period, series_type });
-alpha.technicals.aroon({ symbol, interval, time_period });
-alpha.technicals.aroonosc({ symbol, interval, time_period });
-alpha.technicals.mfi({ symbol, interval, time_period });
-alpha.technicals.trix({ symbol, interval, time_period, series_type });
+alpha.technicals.mom(symbol, { interval, time_period, series_type });
+alpha.technicals.bop(symbol, { interval });
+alpha.technicals.cci(symbol, { interval, time_period });
+alpha.technicals.cmo(symbol, { interval, time_period, series_type });
+alpha.technicals.roc(symbol, { interval, time_period, series_type });
+alpha.technicals.rocr(symbol, { interval, time_period, series_type });
+alpha.technicals.aroon(symbol, { interval, time_period });
+alpha.technicals.aroonosc(symbol, { interval, time_period });
+alpha.technicals.mfi(symbol, { interval, time_period });
+alpha.technicals.trix(symbol, { interval, time_period, series_type });
 alpha.technicals.ultosc({
   symbol,
   interval,
@@ -195,11 +195,11 @@ alpha.technicals.ultosc({
   timeperiod2,
   timeperiod3
 });
-alpha.technicals.dx({ symbol, interval, time_period });
-alpha.technicals.minus_di({ symbol, interval, time_period });
-alpha.technicals.plus_di({ symbol, interval, time_period });
-alpha.technicals.minus_dm({ symbol, interval, time_period });
-alpha.technicals.plus_dm({ symbol, interval, time_period });
+alpha.technicals.dx(symbol, { interval, time_period });
+alpha.technicals.minus_di(symbol, { interval, time_period });
+alpha.technicals.plus_di(symbol, { interval, time_period });
+alpha.technicals.minus_dm(symbol, { interval, time_period });
+alpha.technicals.plus_dm(symbol, { interval, time_period });
 alpha.technicals.bbands({
   symbol,
   interval,
@@ -208,21 +208,21 @@ alpha.technicals.bbands({
   nbdevup,
   nbdevdn
 });
-alpha.technicals.midpoint({ symbol, interval, time_period, series_type });
-alpha.technicals.midprice({ symbol, interval, time_period });
-alpha.technicals.sar({ symbol, interval, acceleration, maximum });
-alpha.technicals.trange({ symbol, interval });
-alpha.technicals.atr({ symbol, interval, time_period });
-alpha.technicals.natr({ symbol, interval, time_period });
-alpha.technicals.ad({ symbol, interval });
-alpha.technicals.adosc({ symbol, interval, fastperiod, slowperiod });
-alpha.technicals.obv({ symbol, interval });
-alpha.technicals.ht_trendline({ symbol, interval, series_type });
-alpha.technicals.ht_sine({ symbol, interval, series_type });
-alpha.technicals.ht_trendmode({ symbol, interval, series_type });
-alpha.technicals.ht_dcperiod({ symbol, interval, series_type });
-alpha.technicals.ht_dcphase({ symbol, interval, series_type });
-alpha.technicals.ht_dcphasor({ symbol, interval, series_type });
+alpha.technicals.midpoint(symbol, { interval, time_period, series_type });
+alpha.technicals.midprice(symbol, { interval, time_period });
+alpha.technicals.sar(symbol, { interval, acceleration, maximum });
+alpha.technicals.trange(symbol, { interval });
+alpha.technicals.atr(symbol, { interval, time_period });
+alpha.technicals.natr(symbol, { interval, time_period });
+alpha.technicals.ad(symbol, { interval });
+alpha.technicals.adosc(symbol, { interval, fastperiod, slowperiod });
+alpha.technicals.obv(symbol, { interval });
+alpha.technicals.ht_trendline(symbol, { interval, series_type });
+alpha.technicals.ht_sine(symbol, { interval, series_type });
+alpha.technicals.ht_trendmode(symbol, { interval, series_type });
+alpha.technicals.ht_dcperiod(symbol, { interval, series_type });
+alpha.technicals.ht_dcphase(symbol, { interval, series_type });
+alpha.technicals.ht_dcphasor(symbol, { interval, series_type });
 ```
 
 ## Sector Performance
