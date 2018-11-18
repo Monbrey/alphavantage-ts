@@ -5,20 +5,22 @@ export interface TimeSeriesParameters {
   interval: string;
 }
 
-export interface TimePeriodSeriesParameters extends TimeSeriesParameters {
+export interface MultiTimeSeriesParameters extends TimeSeriesParameters {
   series_type: string;
+}
+
+export interface TimePeriodSeriesParameters extends MultiTimeSeriesParameters {
   time_period: string;
 }
 
-export interface MultiPeriodSeriesParameters extends TimeSeriesParameters {
-  series_type: string;
+export interface MultiPeriodSeriesParameters extends MultiTimeSeriesParameters {
   fastperiod?: number;
   slowperiod?: number;
   matype?: number;
 }
 
-export interface MultiPeriodAndMaSeriesParameters extends TimeSeriesParameters {
-  series_type: string;
+export interface MultiPeriodAndMaSeriesParameters
+  extends MultiTimeSeriesParameters {
   fastperiod?: number;
   slowperiod?: number;
   signalperiod?: number;
@@ -34,12 +36,6 @@ class Technicals {
     this.api = api;
   }
 
-  /**
-   * A generic function generator for sma-like technicals.
-   *
-   * @param {String} fn
-   *   The sma-like function to use
-   */
   private timePeriodSeries = (fn: string) => ({
     symbol,
     interval,
@@ -49,12 +45,6 @@ class Technicals {
     return this.api.request(fn)({ symbol, interval, time_period, series_type });
   };
 
-  /**
-   * A generic function generator for apo-like technicals.
-   *
-   * @param {String} fn
-   *   The apo-like function to use
-   */
   private multiPeriodSeries = (fn: string) => ({
     symbol,
     interval,
@@ -73,12 +63,6 @@ class Technicals {
     });
   };
 
-  /**
-   * A generic function generator for macdext-like technicals.
-   *
-   * @param {String} fn
-   *   The macdext-like function to use
-   */
   private multiPeriodAndMaSeries = (fn: string) => ({
     symbol,
     interval,
@@ -103,17 +87,11 @@ class Technicals {
     });
   };
 
-  /**
-   * A generic function generator for ht-like technicals.
-   *
-   * @param {String} fn
-   *   The ht-like function to use
-   */
-  private HT_LIKE = (fn: string) => ({
+  private multiTimeSeriesParameters = (fn: string) => ({
     symbol,
     interval,
     series_type
-  }: any) => {
+  }: MultiTimeSeriesParameters) => {
     return this.api.request(fn)({ symbol, interval, series_type });
   };
 
@@ -265,12 +243,12 @@ class Technicals {
   }: TimeSeriesParameters & any) =>
     this.api.request("ADOSC")({ symbol, interval, fastperiod, slowperiod });
   public obv = this.timePeriodSeries("OBV");
-  public ht_trendline = this.HT_LIKE("HT_TRENDLINE");
-  public ht_sine = this.HT_LIKE("HT_SINE");
-  public ht_trendmode = this.HT_LIKE("HT_TRENDMODE");
-  public ht_dcperiod = this.HT_LIKE("HT_DCPERIOD");
-  public ht_dcphase = this.HT_LIKE("HT_DCPHASE");
-  public ht_dcphasor = this.HT_LIKE("HT_PHASOR");
+  public ht_trendline = this.multiTimeSeriesParameters("HT_TRENDLINE");
+  public ht_sine = this.multiTimeSeriesParameters("HT_SINE");
+  public ht_trendmode = this.multiTimeSeriesParameters("HT_TRENDMODE");
+  public ht_dcperiod = this.multiTimeSeriesParameters("HT_DCPERIOD");
+  public ht_dcphase = this.multiTimeSeriesParameters("HT_DCPHASE");
+  public ht_dcphasor = this.multiTimeSeriesParameters("HT_PHASOR");
 }
 
 export default Technicals;

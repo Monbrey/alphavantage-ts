@@ -10,15 +10,6 @@ class Api {
     this.baseUrl = `https://www.alphavantage.co/query?apikey=${apiKey}&`;
   }
 
-  /**
-   * Recursively walk the data tree and replace weird keys with a normalized set.
-   *
-   * @param {Object|String|Number} data
-   *   The data to normalize.
-   *
-   * @returns {Object|String|Number}
-   *   Normalized data.
-   */
   public polish = (data: { [key: string]: string } | string | number) => {
     if (typeof data !== "object") {
       return data;
@@ -49,15 +40,6 @@ class Api {
     return clean;
   };
 
-  /**
-   * Util function to build the proper API url.
-   *
-   * @param {Object} params
-   *   The parameter object as type:value pairs.
-   *
-   * @returns {String}
-   *   The API url to use for a given function and input parameters.
-   */
   public getUrl = (params: { [key: string]: string }) => {
     const query = Object.keys(params || {})
       .filter(key => params[key] !== undefined)
@@ -67,15 +49,6 @@ class Api {
     return `${this.baseUrl}${query}`;
   };
 
-  /**
-   * Wrapper function generator for any endpoint.
-   *
-   * @param {String} fn
-   *   The API function type to use
-   *
-   * @returns {Function}
-   *   The callback function to use in the sdk.
-   */
   public request = (fn: string) => (params: {
     [key: string]: string | number;
   }) => {

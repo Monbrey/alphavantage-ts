@@ -1,13 +1,15 @@
 import Api from "./api";
 
-class Forex {
+class Sectors {
   public api: Api;
 
   constructor(api: Api) {
     this.api = api;
   }
 
-  public performance = this.api.request("SECTOR");
+  public performance = () => {
+    return this.api.request("SECTOR");
+  };
 }
 
-export default Forex;
+export default Sectors;
