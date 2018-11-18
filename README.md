@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/zackurben/alphavantage/badge.svg?branch=master)](https://coveralls.io/github/zackurben/alphavantage?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
 
-This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/) hosted on [NPM](https://www.npmjs.com/package/alphavantage). I have no affiliation with AlphaVantage.
+This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/) hosted on [NPM](https://www.npmjs.com/package/alphavantage-ts). I have no affiliation with AlphaVantage.
 
 All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
@@ -12,26 +12,26 @@ All contributions are welcome! This is an open source project under the MIT lice
 
 ## Installation
 ```bash
-npm i alphavantage
+npm i alphavantage-ts
+```
+or
+```bash
+yarn add alphavantage-ts
 ```
 
 ## Usage
 
-```javascript
-/**
- * Init Alpha Vantage with your API key.
- *
- * @param {String} key
- *   Your Alpha Vantage API key.
- */
-const alpha = require('alphavantage')({ key: 'qweqweqwe' });
+```typescript
+import AlphaVantage from 'alphavantage-ts';
+
+const alpha = new AlphaVantage('YOUR_API_KEY_HERE');
 
 // Simple examples
-alpha.data.intraday(`msft`).then(data => {
+alpha.stocks.intraday(`msft`).then(data => {
   console.log(data);
 });
 
-alpha.data.batch([`msft`, `aapl`]).then(data => {
+alpha.stocks.batch([`msft`, `aapl`]).then(data => {
   console.log(data);
 });
 
@@ -43,11 +43,11 @@ alpha.crypto.intraday('btc', 'usd').then(data => {
   console.log(data);
 })
 
-alpha.technical.sma(`msft`, `daily`, 60, `close`).then(data => {
+alpha.technicals.sma(`msft`, `daily`, 60, `close`).then(data => {
   console.log(data);
 })
 
-alpha.performance.sector().then(data => {
+alpha.sectors.performance().then(data => {
   console.log(data);
 });
 ```
@@ -57,36 +57,37 @@ alpha.performance.sector().then(data => {
 Data polishing
   - Rewrite weird data keys to be consistent across all api calls. This is an optional utility you can use with the result of any api call.
 
-```javascript
-const polished = alpha.util.polish(data);
+```typescript
+const polished = alpha.api.polish(data);
 ```
 
-## Data
+## Stocks
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#time-series-data) for the parameters.
-```javascript
-alpha.data.intraday(symbol, outputsize, datatype, interval)
-alpha.data.daily(symbol, outputsize, datatype, interval)
-alpha.data.daily_adjusted(symbol, outputsize, datatype, interval)
-alpha.data.weekly(symbol, outputsize, datatype, interval)
-alpha.data.weekly_adjusted(symbol, outputsize, datatype, interval)
-alpha.data.monthly(symbol, outputsize, datatype, interval)
-alpha.data.monthly_adjusted(symbol, outputsize, datatype, interval)
-alpha.data.quote(symbol, outputsize, datatype, interval)
-alpha.data.batch([symbol1, symbol2..])
+```typescript
+alpha.stocks.intraday(symbol, { outputsize, datatype, interval })
+alpha.stocks.daily(symbol, { outputsize, datatype, interval })
+alpha.stocks.daily_adjusted(symbol, { outputsize, datatype, interval })
+alpha.stocks.weekly(symbol, { outputsize, datatype, interval })
+alpha.stocks.weekly_adjusted(symbol, { outputsize, datatype, interval })
+alpha.stocks.monthly(symbol, { outputsize, datatype, interval })
+alpha.stocks.monthly_adjusted(symbol, { outputsize, datatype, interval })
+alpha.stocks.quote(symbol, { outputsize, datatype, interval })
+alpha.stocks.batch([symbol1, symbol2..])
+alpha.stocks.search(symbol)
 ```
 
 ## Forex
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#fx) for the parameters.
-```javascript
+```typescript
 alpha.forex.rate(from_currency, to_currency)
 ```
 
 ## Crypto
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#digital-currency) for the parameters.
-```javascript
+```typescript
 alpha.crypto.intraday(symbol, market)
 alpha.crypto.daily(symbol, market)
 alpha.crypto.weekly(symbol, market)
@@ -96,73 +97,68 @@ alpha.crypto.monthly(symbol, market)
 ## Technicals
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#technical-indicators) for the parameters.
-```javascript
-alpha.technical.sma(symbol, market)
-alpha.technical.ema(symbol, interval, time_period, series_type)
-alpha.technical.wma(symbol, interval, time_period, series_type)
-alpha.technical.dema(symbol, interval, time_period, series_type)
-alpha.technical.tema(symbol, interval, time_period, series_type)
-alpha.technical.trima(symbol, interval, time_period, series_type)
-alpha.technical.kama(symbol, interval, time_period, series_type)
-alpha.technical.mama(symbol, interval, series_type, fastlimit, slowlimit)
-alpha.technical.t3(symbol, interval, time_period, series_type)
-alpha.technical.macd(symbol, interval, series_type, fastperiod, slowperiod, signalperiod)
-alpha.technical.macdext(symbol, interval, series_type, fastperiod, slowperiod, signalperiod, fastmatype, slowmatype, signalmatype)
-alpha.technical.stoch(symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype)
-alpha.technical.stochf(symbol, interval, fastkperiod, fastdperiod, fastdmatype)
-alpha.technical.rsi(symbol, interval, time_period, series_type)
-alpha.technical.stochrsi(symbol, interval, time_period, series_type, fastkperiod, slowdperiod, fastdmatype)
-alpha.technical.willr(symbol, interval, time_period)
-alpha.technical.adx(symbol, interval, time_period)
-alpha.technical.adxr(symbol, interval, time_period)
-alpha.technical.apo(symbol, interval, series_type, fastperiod, slowperiod, matype)
-alpha.technical.ppo(symbol, interval, series_type, fastperiod, slowperiod, matype)
-alpha.technical.mom(symbol, interval, time_period, series_type)
-alpha.technical.bop(symbol, interval)
-alpha.technical.cci(symbol, interval, time_period)
-alpha.technical.cmo(symbol, interval, time_period, series_type)
-alpha.technical.roc(symbol, interval, time_period, series_type)
-alpha.technical.rocr(symbol, interval, time_period, series_type)
-alpha.technical.aroon(symbol, interval, time_period)
-alpha.technical.aroonosc(symbol, interval, time_period)
-alpha.technical.mfi(symbol, interval, time_period)
-alpha.technical.trix(symbol, interval, time_period, series_type)
-alpha.technical.ultosc(symbol, interval, timeperiod1, timeperiod2, timeperiod3)
-alpha.technical.dx(symbol, interval, time_period)
-alpha.technical.minus_di(symbol, interval, time_period)
-alpha.technical.plus_di(symbol, interval, time_period)
-alpha.technical.minus_dm(symbol, interval, time_period)
-alpha.technical.plus_dm(symbol, interval, time_period)
-alpha.technical.bbands(symbol, interval, time_period, series_type, nbdevup, nbdevdn)
-alpha.technical.midpoint(symbol, interval, time_period, series_type)
-alpha.technical.midprice(symbol, interval, time_period)
-alpha.technical.sar(symbol, interval, acceleration, maximum)
-alpha.technical.trange(symbol, interval)
-alpha.technical.atr(symbol, interval, time_period)
-alpha.technical.natr(symbol, interval, time_period)
-alpha.technical.ad(symbol, interval)
-alpha.technical.adosc(symbol, interval, fastperiod, slowperiod)
-alpha.technical.obv(symbol, interval)
-alpha.technical.ht_trendline(symbol, interval, series_type)
-alpha.technical.ht_sine(symbol, interval, series_type)
-alpha.technical.ht_trendmode(symbol, interval, series_type)
-alpha.technical.ht_dcperiod(symbol, interval, series_type)
-alpha.technical.ht_dcphase(symbol, interval, series_type)
-alpha.technical.ht_dcphasor(symbol, interval, series_type)
+```typescript
+alpha.technicals.sma(symbol, { market })
+alpha.technicals.ema(symbol, { interval, time_period, series_type })
+alpha.technicals.wma(symbol, { interval, time_period, series_type })
+alpha.technicals.dema(symbol, { interval, time_period, series_type })
+alpha.technicals.tema(symbol, { interval, time_period, series_type })
+alpha.technicals.trima(symbol, { interval, time_period, series_type })
+alpha.technicals.kama(symbol, { interval, time_period, series_type })
+alpha.technicals.mama(symbol, { interval, series_type, fastlimit, slowlimit })
+alpha.technicals.t3(symbol, { interval, time_period, series_type })
+alpha.technicals.macd(symbol, { interval, series_type, fastperiod, slowperiod, signalperiod })
+alpha.technicals.macdext(symbol, { interval, series_type, fastperiod, slowperiod, signalperiod, fastmatype, slowmatype, signalmatype })
+alpha.technicals.stoch(symbol, { interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype })
+alpha.technicals.stochf(symbol, { interval, fastkperiod, fastdperiod, fastdmatype })
+alpha.technicals.rsi(symbol, { interval, time_period, series_type })
+alpha.technicals.stochrsi(symbol, { interval, time_period, series_type, fastkperiod, slowdperiod, fastdmatype })
+alpha.technicals.willr(symbol, { interval, time_period })
+alpha.technicals.adx(symbol, { interval, time_period })
+alpha.technicals.adxr(symbol, { interval, time_period })
+alpha.technicals.apo(symbol, { interval, series_type, fastperiod, slowperiod, matype })
+alpha.technicals.ppo(symbol, { interval, series_type, fastperiod, slowperiod, matype })
+alpha.technicals.mom(symbol, { interval, time_period, series_type })
+alpha.technicals.bop(symbol, { interval })
+alpha.technicals.cci(symbol, { interval, time_period })
+alpha.technicals.cmo(symbol, { interval, time_period, series_type })
+alpha.technicals.roc(symbol, { interval, time_period, series_type })
+alpha.technicals.rocr(symbol, { interval, time_period, series_type })
+alpha.technicals.aroon(symbol, { interval, time_period })
+alpha.technicals.aroonosc(symbol, { interval, time_period })
+alpha.technicals.mfi(symbol, { interval, time_period })
+alpha.technicals.trix(symbol, { interval, time_period, series_type })
+alpha.technicals.ultosc(symbol, { interval, timeperiod1, timeperiod2, timeperiod3 })
+alpha.technicals.dx(symbol, { interval, time_period })
+alpha.technicals.minus_di(symbol, { interval, time_period })
+alpha.technicals.plus_di(symbol, { interval, time_period })
+alpha.technicals.minus_dm(symbol, { interval, time_period })
+alpha.technicals.plus_dm(symbol, { interval, time_period })
+alpha.technicals.bbands(symbol, { interval, time_period, series_type, nbdevup, nbdevdn })
+alpha.technicals.midpoint(symbol, { interval, time_period, series_type })
+alpha.technicals.midprice(symbol, { interval, time_period })
+alpha.technicals.sar(symbol, { interval, acceleration, maximum })
+alpha.technicals.trange(symbol, { interval })
+alpha.technicals.atr(symbol, { interval, time_period })
+alpha.technicals.natr(symbol, { interval, time_period })
+alpha.technicals.ad(symbol, { interval })
+alpha.technicals.adosc(symbol, { interval, fastperiod, slowperiod })
+alpha.technicals.obv(symbol, { interval })
+alpha.technicals.ht_trendline(symbol, { interval, series_type })
+alpha.technicals.ht_sine(symbol, { interval, series_type })
+alpha.technicals.ht_trendmode(symbol, { interval, series_type })
+alpha.technicals.ht_dcperiod(symbol, { interval, series_type })
+alpha.technicals.ht_dcphase(symbol, { interval, series_type })
+alpha.technicals.ht_dcphasor(symbol, { interval, series_type })
 ```
 
-## Performance
+## Sector Performance
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-information) for the parameters.
-```javascript
-alpha.performance.sector()
+```typescript
+alpha.sectors.performance()
 ```
 
 ## Contributing
 
 All contributions are welcome! The purpose of this library is to keep function parity with the Alpha Vantage API, while keeping a slim and intuitive programming interface. Before any pull requests are made, please run `npm run lint` to fix style issues and ensure that all test are passing `npm test`. The codebase should always remain at 100% test coverage.
-
-## Contact
-  - Author: Zack Urben
-  - Twitter: https://twitter.com/zackurben (better)
-  - Contact: zackurben@gmail.com
