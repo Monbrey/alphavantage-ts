@@ -1,5 +1,4 @@
-import * as request from "request-promise-native";
-import { RequestResponse } from "request";
+import fetch from "cross-fetch";
 
 import * as constants from "./constants";
 
@@ -58,17 +57,13 @@ class Api {
   }) => {
     const url = this.getUrl({ ...params, function: fn });
 
-    return request
-      .get(url, {
-        resolveWithFullResponse: true,
-        simple: false
-      })
-      .then(({ body, statusCode }: RequestResponse) => {
-        if (statusCode !== 200) {
-          throw `An AlphaVantage error occurred (${url}). ${statusCode}: ${body}`;
+    return fetch(url)
+      .then((res: Response) => {
+        if (res.status !== 200) {
+          throw `An AlphaVantage error occurred (${url}). ${res.status}: ${res.body}`;
         }
 
-        return JSON.parse(body);
+        return res.json()
       })
       .then((data: { [key: string]: any }) => {
         if (
